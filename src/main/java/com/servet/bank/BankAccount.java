@@ -25,9 +25,13 @@ public class BankAccount {
     }
 
     public void withdraw(double amount) {
-        // TODO: amount <= 0 ise IllegalArgumentException
-        // TODO: amount > balance ise InsufficientFundsException("Yetersiz bakiye...")
-        throw new UnsupportedOperationException("Henüz yazılmadı");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Tutar pozitif olmalı: " + amount);
+        }
+        if (amount > balance) {
+            throw new InsufficientFundsException("Yetersiz bakiye: bakiye " + balance + ", istenen " + amount);
+        }
+        balance -= amount;
     }
 
     public void transfer(BankAccount target, double amount) {
