@@ -1,10 +1,8 @@
 package com.servet.bank;
 
 /**
- * Basit bir banka hesabı.
- *
- * TDD görevi: Önce BankAccountTest'i çalıştır (kırmızı), sonra aşağıdaki
- * metotları testleri geçecek şekilde doldur (yeşil), en son kodu temizle (refactor).
+ * Basit bir banka hesabı: para yatırma, çekme ve hesaplar arası transfer.
+ * TDD ile yazıldı (Red → Green → Refactor); testler: BankAccountTest.
  */
 public class BankAccount {
 
@@ -23,16 +21,12 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Tutar pozitif olmalı: " + amount);
-        }
+        requirePositive(amount);
         balance += amount;
     }
 
     public void withdraw(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Tutar pozitif olmalı: " + amount);
-        }
+        requirePositive(amount);
         if (amount > balance) {
             throw new InsufficientFundsException("Yetersiz bakiye: bakiye " + balance + ", istenen " + amount);
         }
@@ -57,5 +51,11 @@ public class BankAccount {
 
     public double getBalance() {
         return balance;
+    }
+
+    private static void requirePositive(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Tutar pozitif olmalı: " + amount);
+        }
     }
 }
