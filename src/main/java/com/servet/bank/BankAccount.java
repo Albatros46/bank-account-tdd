@@ -12,7 +12,12 @@ public class BankAccount {
     private double balance;
 
     public BankAccount(String accountNumber, double initialBalance) {
-        // TODO: accountNumber boş/null olamaz, initialBalance negatif olamaz -> IllegalArgumentException
+        if (accountNumber == null || accountNumber.isBlank()) {
+            throw new IllegalArgumentException("Hesap numarası boş olamaz");
+        }
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Başlangıç bakiyesi negatif olamaz: " + initialBalance);
+        }
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
     }
