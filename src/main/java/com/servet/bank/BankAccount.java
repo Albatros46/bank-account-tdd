@@ -18,8 +18,10 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
-        // TODO: amount <= 0 ise IllegalArgumentException, değilse bakiyeye ekle
-        throw new UnsupportedOperationException("Henüz yazılmadı");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Tutar pozitif olmalı: " + amount);
+        }
+        balance += amount;
     }
 
     public void withdraw(double amount) {
