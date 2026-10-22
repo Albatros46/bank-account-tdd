@@ -40,8 +40,15 @@ public class BankAccount {
     }
 
     public void transfer(BankAccount target, double amount) {
-        // TODO: target null olamaz, kendine transfer yapılamaz; withdraw + target.deposit
-        throw new UnsupportedOperationException("Henüz yazılmadı");
+        if (target == null) {
+            throw new IllegalArgumentException("Hedef hesap boş olamaz");
+        }
+        if (target == this) {
+            throw new IllegalArgumentException("Kendi hesabına transfer yapılamaz");
+        }
+        // Sıra önemli: önce çek, sonra yatır. Çekme başarısız olursa hedef hesaba hiç dokunulmaz.
+        withdraw(amount);
+        target.deposit(amount);
     }
 
     public String getAccountNumber() {
