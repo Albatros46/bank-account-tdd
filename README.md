@@ -58,6 +58,3 @@ mvn test
 Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
-
-## What I learned
-- _TODO: 2–3 sentences in your own words_
